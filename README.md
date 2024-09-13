@@ -9,7 +9,7 @@ The data is ingested from a Tron JSON RPC endpoint using [`.addLog()`](https://d
 
 The requested data is transformed in batches by a single handler provided to the `processor.run()` method. The final data is presented as a GraphQL API.
 
-Dependencies: Node.js v20 or newer, Git, Docker.
+Dependencies: Node.js v20 or newer, Git, Docker, [Squid CLI](https://docs.sqd.dev/squid-cli/installation/) (optional).
 
 ## Quickstart
 
@@ -27,17 +27,20 @@ docker compose up -d
 # 4. Build the squid
 npm run build
 
-# 5. Start both the squid processor and the GraphQL server
+# 5. Apply DB migrations and start squid services
 sqd run .
 ```
 A GraphiQL playground will be available at [localhost:4350/graphql](http://localhost:4350/graphql).
 
 You can also start squid services one by one:
 ```bash
+npx squid-typeorm-migration apply # applies the DB migration
+```
+```bash
 node -r dotenv/config lib/main.js # starts the processor
 ```
 ```bash
-npx squid-graphql-server
+npx squid-graphql-server # starts the GraphQL server
 ```
 
 See the [master dev guide](https://docs.sqd.dev/sdk/how-to-start/squid-development/) to learn where to go from here.
