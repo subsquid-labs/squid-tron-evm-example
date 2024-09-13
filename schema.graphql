@@ -1,0 +1,18 @@
+type UsdtTransfer @entity {
+  id: ID!
+  block: Int! @index
+  timestamp: BigInt! @index
+  from: String! @index
+  to: String! @index
+  value: BigInt!
+  txHash: String! @index
+}
+
+type TrxBurn @entity {
+  id: ID!
+  block: Int! @index
+  timestamp: BigInt! @index
+  address: String! @index
+  value: BigInt!
+  txHash: String! @index
+}
